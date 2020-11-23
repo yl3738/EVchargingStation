@@ -1,5 +1,5 @@
 
-We will try to observe patterns or facts and do some analysis on the EV charging station data set.
+This project is managed by Yu Liu, Dingwen Xie and Yuanhang Chen. We will try to observe patterns or facts and do some analysis on the EV charging station data set.
 Link of the book URL: https://yl3738.github.io/EVchargingStation/
 
 
