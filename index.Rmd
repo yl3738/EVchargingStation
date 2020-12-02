@@ -1,9 +1,0 @@
---- 
-title: "Analysis on EV Charging Station in NY State"
-author: "Dingwen Xie, Yuanhang Chen, Yu Liu"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
----
-
-# Introduction
-
