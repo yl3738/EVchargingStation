@@ -7,3 +7,6 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+Electric cars, which accounted for 2.6% of global car sales and about 1% of global car stock in 2019, registered a 40% year-on-year increase. Regarding to International Energy Agencies (IEA) Global EV Outlook 2020( https://www.iea.org/reports/global-ev-outlook-2020), “In 2019, there were about 7.3 million chargers worldwide, of which about 6.5 million were private, light-duty vehicle slow chargers in homes, multi-dwelling buildings and workplaces. Convenience, cost-effectiveness and a variety of support policies (such as preferential rates, equipment purchase incentives, and rebates) are the main drivers for the prevalence of private charging.” The United States takes the second largest market share in private EV chargers, and we would like to focus on New York State. 
+
+Related datasets are downloaded from this website (https://www.nyserda.ny.gov/All-Programs/Programs/ChargeNY/Support-Electric/Data-on-Electric-Vehicles-and-Charging-Stations). We will use the EV registration map and EV charging station map. 
