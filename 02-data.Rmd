@@ -8,14 +8,14 @@ library(robotstxt)
 library(pander)
 library(readxl)
 #paths_allowed("https://data.ny.gov/api/views/7rrd-248n/rows.csv?accessType=DOWNLOAD&sorting=true")
-stations <-read_csv("https://data.ny.gov/api/views/7rrd-248n/rows.csv?accessType=DOWNLOAD&sorting=true")
+stations <-read.csv("https://data.ny.gov/api/views/7rrd-248n/rows.csv?accessType=DOWNLOAD&sorting=true")
 registration_url<-"https://www.nyserda.ny.gov/-/media/Files/Programs/ChargeNY/EV-Registration-Tables.xlsx"
 temp <-tempfile(fileext = ".xlsx")
 download.file(registration_url, destfile=temp, mode='wb')
 registration_utility <- readxl::read_excel(temp, sheet =1)
 registration_zipcode <- readxl::read_excel(temp, sheet =2)
 registration_model <- readxl::read_excel(temp, sheet =3)
-registration_country <- readxl::read_excel(temp, sheet =4)
+registration_county <- readxl::read_excel(temp, sheet =4)
 registration_originaltime <- readxl::read_excel(temp, sheet =5)
 registration_originalmake <- readxl::read_excel(temp, sheet =6)
 ```
@@ -44,9 +44,9 @@ pander(head(registration_model))
 ```
 
 
-<p style="color:red;font-size:23px;">EV Registration data: Current by country</p>
+<p style="color:red;font-size:23px;">EV Registration data: Current by county</p>
 ```{r }
-pander(head(registration_country))
+pander(head(registration_county))
 ```
 
 
