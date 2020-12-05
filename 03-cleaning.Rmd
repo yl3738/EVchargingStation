@@ -10,3 +10,47 @@ We will change the types to appropriate ones for the primary features we are goi
 Also, in the next section, we will work on dealing with the missing values. we will check whether there are certain patterns in the empty columns and rows, and drop those unnecessary entries.
 
 
+```{r stations, include=FALSE}
+library(tidyverse)
+library(rvest)
+library(robotstxt)
+library(pander)
+library(readxl)
+#paths_allowed("https://data.ny.gov/api/views/7rrd-248n/rows.csv?accessType=DOWNLOAD&sorting=true")
+stations <-read.csv("https://data.ny.gov/api/views/7rrd-248n/rows.csv?accessType=DOWNLOAD&sorting=true")
+registration_url<-"https://www.nyserda.ny.gov/-/media/Files/Programs/ChargeNY/EV-Registration-Tables.xlsx"
+temp <-tempfile(fileext = ".xlsx")
+download.file(registration_url, destfile=temp, mode='wb')
+registration_utility <- readxl::read_excel(temp, sheet =1)
+registration_zipcode <- readxl::read_excel(temp, sheet =2)
+registration_model <- readxl::read_excel(temp, sheet =3)
+registration_county <- readxl::read_excel(temp, sheet =4)
+registration_originaltime <- readxl::read_excel(temp, sheet =5)
+registration_originalmake <- readxl::read_excel(temp, sheet =6)
+```
+
+
+<p style="font-size:23px;"> EV Charging Stations Info </p>
+#TODO after cleanning
+
+
+<p style="font-size:23px;"> EV Registration Info </p>
+#Utility, original time and make may not be useful for our project.
+
+Popular model ranking
+```{r}
+registration_modelname<-unite(registration_model, modelname, Make:Model, sep='-')[rev(order(registration_model$Registrations)),][-1,]
+ggplot(registration_modelname, aes(x = reorder(`modelname`,-`Registrations`), y = `Registrations`)) +
+  geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="Make-Model")
+```
+
+
+County ranking
+```{r}
+sortedcounty<-registration_county[rev(order(registration_county$`Total EVs`)),][-1,]
+ggplot(sortedcounty, aes(x = reorder(`County`,-`Total EVs`), y = `Total EVs`)) +
+  geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="County")
+```
+
+Zipcode heatmap (TODO)
+#https://stackoverflow.com/questions/30787877/making-a-zip-code-choropleth-in-r-using-ggplot2-and-ggmap  need to install choroplethrZip
