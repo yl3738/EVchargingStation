@@ -30,8 +30,40 @@ registration_originalmake <- readxl::read_excel(temp, sheet =6)
 ```
 
 
+
+
 <p style="font-size:23px;"> EV Charging Stations Info </p>
-#TODO after cleanning
+```{r}
+## drop 3 columns with only NA values, will drop more irrelevant columns. Fuel Type Code has ELEV only. State has NY only. Status Code has E only
+stations <- stations %>%
+      select(- c("Plus4", "Expected.Date", "EV.Other.Info","Fuel.Type.Code","State","Station.Phone","Status.Code"))
+```
+
+
+Charging Stations Access Days Time
+```{r}
+stations$hours <- ifelse(grepl("24", stations$Access.Days.Time), "24hr", "other")
+pie(table(stations$hours),col=grey.colors(2))
+```
+     
+Charging Stations Owners
+```{r}
+ownerlist<-data.frame(table(stations$Owner.Type.Code[stations$Owner.Type.Code!=""]))
+colnames(ownerlist)<-c("Owner_Type","Freq")
+ownerlist$Owner_Type<-recode(ownerlist$Owner_Type,
+  "FG" = "Federal government owned",
+  "J" = "Jointly owned",
+  "LG"="Local government owned",
+  "P"="Privately owned",
+  "SG"="State government owned",
+  "T"="Utility owned"
+)
+ggplot(ownerlist, aes(x="", y=Freq, fill=Owner_Type)) +
+ geom_bar(stat="identity", width=1) +
+ coord_polar("y", start=0) +
+  theme_void()
+```
+
 
 
 <p style="font-size:23px;"> EV Registration Info </p>
