@@ -1,5 +1,8 @@
 # Data transformation
-
+```{r setup, include=FALSE}
+ # keep this chunk in your .Rmd file
+ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
 
 From the New York State government website, we download the open NY data directly from the electric vehicle charging station map section web link. We then use the downloaded data set directly as a dataframe. 
 
@@ -84,5 +87,24 @@ ggplot(sortedcounty, aes(x = reorder(`County`,-`Total EVs`), y = `Total EVs`)) +
   geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="County")
 ```
 
-Zipcode heatmap (TODO)
-#https://stackoverflow.com/questions/30787877/making-a-zip-code-choropleth-in-r-using-ggplot2-and-ggmap  need to install choroplethrZip
+Zipcode heatmap 
+```{r}
+library(choroplethrZip)
+library(mapproj)
+
+zip_group <- stations %>%
+  group_by(ZIP)%>%
+  summarize(Count=n())
+
+colnames(zip_group) <- c("region", "value")
+zip_group['region']=as.character(zip_group$region)
+
+zip_choropleth(zip_group, 
+               state_zoom = "new york", 
+               title      = "Draw a heatmap by zip",
+               legend     = "Population") + coord_map()  
+
+```
+
+
+
