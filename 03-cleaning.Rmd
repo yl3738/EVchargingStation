@@ -108,3 +108,19 @@ zip_choropleth(zip_group,
 
 
 
+<p style="font-size:23px;"> Time series </p>
+
+```{r}
+library(lubridate)
+stations_ts <- stations
+stations_ts$Open.Date <- as.Date(stations_ts$Open.Date, "%m/%d/%Y")
+
+#stations_ts["Open.year"] <- year(stations_ts$Open.Date)
+#stations_ts["Open.month"] <- month(stations_ts$Open.Date)
+
+num <- data.frame(table(factor(format(stations_ts$Open.Date,"%D"))))
+num$Date <- as.Date(num$Var1,"%m/%d/%y")
+ggplot(num, aes(Date, Freq))+geom_line()+ ggtitle('Time Series Analysis on the Number of Newly Opened stations') + xlab("Date")+ylab("Number of Stations Count")
+```
+
+The above graph plots the number of newly opened stations on a certain day. It is clear that there are more stations opened in recent years. 
