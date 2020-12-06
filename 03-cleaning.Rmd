@@ -106,7 +106,13 @@ zip_choropleth(zip_group,
 
 ```
 
-
+```{r}
+temp <- registration_originaltime[1:nrow(registration_originaltime)-1,]
+temp  <- temp  %>%
+  group_by(Year)%>%
+  summarize(total_EV=sum(`Total EVs`))
+ggplot(temp, aes(x=Year, y=total_EV))+geom_col()+ ggtitle('Number of Total EV by Years') + xlab("Year")+ylab("Number of Total EV")
+```
 
 <p style="font-size:23px;"> Time series </p>
 
@@ -124,3 +130,8 @@ ggplot(num, aes(Date, Freq))+geom_line()+ ggtitle('Time Series Analysis on the N
 ```
 
 The above graph plots the number of newly opened stations on a certain day. It is clear that there are more stations opened in recent years. 
+
+
+
+
+
