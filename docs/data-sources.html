@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Data sources | YOUR TITLE HERE</title>
-  <meta name="description" content="Chapter 2 Data sources | YOUR TITLE HERE" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <title>Chapter 2 Data sources | Analysis on EV Charging Station in NY State</title>
+  <meta name="description" content="Chapter 2 Data sources | Analysis on EV Charging Station in NY State" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Data sources | YOUR TITLE HERE" />
+  <meta property="og:title" content="Chapter 2 Data sources | Analysis on EV Charging Station in NY State" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Data sources | YOUR TITLE HERE" />
+  <meta name="twitter:title" content="Chapter 2 Data sources | Analysis on EV Charging Station in NY State" />
   
   
   
 
-<meta name="author" content="YOUR NAMES HERE" />
+<meta name="author" content="Dingwen Xie, Yuanhang Chen, Yu Liu" />
 
 
-<meta name="date" content="2020-11-09" />
+<meta name="date" content="2020-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="data-transformation.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 
@@ -68,7 +69,7 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">EVCharger</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -89,7 +90,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysis on EV Charging Station in NY State</a>
           </h1>
         </div>
 
@@ -97,8 +98,805 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-sources" class="section level1" number="2">
+<div id="data-sources" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
+<p style="color:red;font-size:23px;">
+EV charging stations data
+</p>
+<table style="width:99%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="23%" />
+<col width="43%" />
+<col width="31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Fuel.Type.Code</th>
+<th align="center">Station.Name</th>
+<th align="center">Street.Address</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">ELEC</td>
+<td align="center">ScottTech</td>
+<td align="center">336 Court St</td>
+</tr>
+<tr class="even">
+<td align="center">ELEC</td>
+<td align="center">New York State Department of
+Transportation</td>
+<td align="center">367 NY-59</td>
+</tr>
+<tr class="odd">
+<td align="center">ELEC</td>
+<td align="center">Tony Mangino Mitsubishi</td>
+<td align="center">1658 Route 9</td>
+</tr>
+<tr class="even">
+<td align="center">ELEC</td>
+<td align="center">HONEST WEIGHT</td>
+<td align="center">100 Watervliet av</td>
+</tr>
+<tr class="odd">
+<td align="center">ELEC</td>
+<td align="center">Brighton Memorial Library</td>
+<td align="center">2300 Elmwood Ave</td>
+</tr>
+<tr class="even">
+<td align="center">ELEC</td>
+<td align="center">CARCHARGING</td>
+<td align="center">1 Pennsylvania Plaza</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="45%" />
+<col width="20%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Intersection.Directions</th>
+<th align="center">City</th>
+<th align="center">State</th>
+<th align="center">ZIP</th>
+<th align="center">Plus4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Binghamton</td>
+<td align="center">NY</td>
+<td align="center">13904</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">Nanuet</td>
+<td align="center">NY</td>
+<td align="center">10954</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Clifton Park</td>
+<td align="center">NY</td>
+<td align="center">12065</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">HONEST WEIGHT 2</td>
+<td align="center">Albany</td>
+<td align="center">NY</td>
+<td align="center">12206</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">Rochester</td>
+<td align="center">NY</td>
+<td align="center">14618</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">ICON-1 PENN PLA; See valet
+attendant for charging station</td>
+<td align="center">New York</td>
+<td align="center">NY</td>
+<td align="center">10119</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="22%" />
+<col width="19%" />
+<col width="22%" />
+<col width="36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Station.Phone</th>
+<th align="center">Status.Code</th>
+<th align="center">Expected.Date</th>
+<th align="center">Groups.With.Access.Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">315-214-6065</td>
+<td align="center">E</td>
+<td align="center">NA</td>
+<td align="center">Public</td>
+</tr>
+<tr class="even">
+<td align="center">866-816-7584</td>
+<td align="center">E</td>
+<td align="center">NA</td>
+<td align="center">Public - Call ahead</td>
+</tr>
+<tr class="odd">
+<td align="center">518-373-4100</td>
+<td align="center">E</td>
+<td align="center">NA</td>
+<td align="center">Public</td>
+</tr>
+<tr class="even">
+<td align="center">888-758-4389</td>
+<td align="center">E</td>
+<td align="center">NA</td>
+<td align="center">Public</td>
+</tr>
+<tr class="odd">
+<td align="center">585-784-5300</td>
+<td align="center">E</td>
+<td align="center">NA</td>
+<td align="center">Public</td>
+</tr>
+<tr class="even">
+<td align="center">888-758-4389</td>
+<td align="center">E</td>
+<td align="center">NA</td>
+<td align="center">Public</td>
+</tr>
+</tbody>
+</table>
+<table style="width:96%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="43%" />
+<col width="23%" />
+<col width="29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Access.Days.Time</th>
+<th align="center">Cards.Accepted</th>
+<th align="center">EV.Level1.EVSE.Num</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">24 hours daily</td>
+<td align="center"></td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">24 hours daily; for hotel
+guest use only</td>
+<td align="center"></td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">24 hours daily; priority for
+Mitsubishi vehicles</td>
+<td align="center"></td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">24 hours daily</td>
+<td align="center"></td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">24 hours daily</td>
+<td align="center"></td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">24 hours daily</td>
+<td align="center"></td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="26%" />
+<col width="24%" />
+<col width="20%" />
+<col width="28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">EV.Level2.EVSE.Num</th>
+<th align="center">EV.DC.Fast.Count</th>
+<th align="center">EV.Other.Info</th>
+<th align="center">EV.Network</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">Non-Networked</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">EV Connect</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">Non-Networked</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">ChargePoint Network</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">Non-Networked</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">ChargePoint Network</td>
+</tr>
+</tbody>
+</table>
+<table style="width:97%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="41%" />
+<col width="23%" />
+<col width="15%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">EV.Network.Web</th>
+<th align="center">Geocode.Status</th>
+<th align="center">Latitude</th>
+<th align="center">Longitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">200-9</td>
+<td align="center">42.1</td>
+<td align="center">-75.89</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="http://evconnect.com/" class="uri">http://evconnect.com/</a></td>
+<td align="center">200-9</td>
+<td align="center">41.1</td>
+<td align="center">-74.03</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">200-9</td>
+<td align="center">42.86</td>
+<td align="center">-73.76</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="http://www.chargepoint.com/" class="uri">http://www.chargepoint.com/</a></td>
+<td align="center">GPS</td>
+<td align="center">42.68</td>
+<td align="center">-73.78</td>
+</tr>
+<tr class="odd">
+<td align="center"></td>
+<td align="center">200-9</td>
+<td align="center">43.13</td>
+<td align="center">-77.58</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="http://www.chargepoint.com/" class="uri">http://www.chargepoint.com/</a></td>
+<td align="center">GPS</td>
+<td align="center">40.75</td>
+<td align="center">-73.99</td>
+</tr>
+</tbody>
+</table>
+<table style="width:99%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="30%" />
+<col width="12%" />
+<col width="30%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Date.Last.Confirmed</th>
+<th align="center">ID</th>
+<th align="center">Updated.At</th>
+<th align="center">Owner.Type.Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">09/03/2020</td>
+<td align="center">67753</td>
+<td align="center">2020-09-03 19:35:48</td>
+<td align="center">P</td>
+</tr>
+<tr class="even">
+<td align="center">04/08/2020</td>
+<td align="center">94851</td>
+<td align="center">2020-06-10 15:37:23</td>
+<td align="center">P</td>
+</tr>
+<tr class="odd">
+<td align="center">03/03/2020</td>
+<td align="center">98431</td>
+<td align="center">2020-03-03 21:13:47</td>
+<td align="center">P</td>
+</tr>
+<tr class="even">
+<td align="center">11/30/2020</td>
+<td align="center">146796</td>
+<td align="center">2020-11-30 10:28:01</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">09/03/2020</td>
+<td align="center">149107</td>
+<td align="center">2020-09-03 19:35:48</td>
+<td align="center">LG</td>
+</tr>
+<tr class="even">
+<td align="center">11/30/2020</td>
+<td align="center">162525</td>
+<td align="center">2020-11-30 10:28:01</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="28%" />
+<col width="17%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Federal.Agency.ID</th>
+<th align="center">Federal.Agency.Name</th>
+<th align="center">Open.Date</th>
+<th align="center">EV.Connector.Types</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">04/01/2015</td>
+<td align="center">J1772</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">12/06/2016</td>
+<td align="center">J1772</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">01/01/2012</td>
+<td align="center">J1772</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">J1772</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center">09/26/2016</td>
+<td align="center">J1772</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">J1772 NEMA520</td>
+</tr>
+</tbody>
+</table>
+<p style="color:red;font-size:23px;">
+EV Registration data: Current by utility
+</p>
+<table style="width:88%;">
+<colgroup>
+<col width="45%" />
+<col width="16%" />
+<col width="8%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">EIA Utility Name</th>
+<th align="center">PHEV/EREV</th>
+<th align="center">BEV</th>
+<th align="center">Total EVs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Steuben Rural Elec Coop, Inc</td>
+<td align="center">53</td>
+<td align="center">24</td>
+<td align="center">77</td>
+</tr>
+<tr class="even">
+<td align="center">Rochester Gas &amp; Electric Corp</td>
+<td align="center">1901</td>
+<td align="center">983</td>
+<td align="center">2884</td>
+</tr>
+<tr class="odd">
+<td align="center">Orange &amp; Rockland Utils Inc</td>
+<td align="center">778</td>
+<td align="center">769</td>
+<td align="center">1547</td>
+</tr>
+<tr class="even">
+<td align="center">Village of Rouses Point - (NY)</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">Village of Rockville Centre -
+(NY)</td>
+<td align="center">53</td>
+<td align="center">53</td>
+<td align="center">106</td>
+</tr>
+<tr class="even">
+<td align="center">Village of Freeport - (NY)</td>
+<td align="center">42</td>
+<td align="center">24</td>
+<td align="center">66</td>
+</tr>
+</tbody>
+</table>
+<p style="color:red;font-size:23px;">
+EV Registration data: Current by zipcode
+</p>
+<table style="width:57%;">
+<colgroup>
+<col width="15%" />
+<col width="16%" />
+<col width="8%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">ZIP Code</th>
+<th align="center">PHEV/EREV</th>
+<th align="center">BEV</th>
+<th align="center">Total EVs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">13244</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">13301</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">13302</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">13219</td>
+<td align="center">18</td>
+<td align="center">7</td>
+<td align="center">25</td>
+</tr>
+<tr class="odd">
+<td align="center">13220</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">13224</td>
+<td align="center">28</td>
+<td align="center">7</td>
+<td align="center">35</td>
+</tr>
+</tbody>
+</table>
+<p style="color:red;font-size:23px;">
+EV Registration data: Current by make-model
+</p>
+<table style="width:61%;">
+<colgroup>
+<col width="16%" />
+<col width="22%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Make</th>
+<th align="center">Model</th>
+<th align="center">Registrations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Tesla</td>
+<td align="center">Model 3</td>
+<td align="center">7080</td>
+</tr>
+<tr class="even">
+<td align="center">Toyota</td>
+<td align="center">Prius Prime</td>
+<td align="center">6483</td>
+</tr>
+<tr class="odd">
+<td align="center">Tesla</td>
+<td align="center">Model S</td>
+<td align="center">4266</td>
+</tr>
+<tr class="even">
+<td align="center">Chevrolet</td>
+<td align="center">Volt</td>
+<td align="center">4222</td>
+</tr>
+<tr class="odd">
+<td align="center">Ford</td>
+<td align="center">Fusion Energi</td>
+<td align="center">3427</td>
+</tr>
+<tr class="even">
+<td align="center">Tesla</td>
+<td align="center">Model X</td>
+<td align="center">2802</td>
+</tr>
+</tbody>
+</table>
+<p style="color:red;font-size:23px;">
+EV Registration data: Current by county
+</p>
+<table style="width:72%;">
+<colgroup>
+<col width="29%" />
+<col width="16%" />
+<col width="9%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">County</th>
+<th align="center">PHEV/EREV</th>
+<th align="center">BEV</th>
+<th align="center">Total EVs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Richmond County</td>
+<td align="center">539</td>
+<td align="center">351</td>
+<td align="center">890</td>
+</tr>
+<tr class="even">
+<td align="center">Rensselaer County</td>
+<td align="center">258</td>
+<td align="center">154</td>
+<td align="center">412</td>
+</tr>
+<tr class="odd">
+<td align="center">Queens County</td>
+<td align="center">1811</td>
+<td align="center">1473</td>
+<td align="center">3284</td>
+</tr>
+<tr class="even">
+<td align="center">Rockland County</td>
+<td align="center">436</td>
+<td align="center">523</td>
+<td align="center">959</td>
+</tr>
+<tr class="odd">
+<td align="center">Schoharie County</td>
+<td align="center">44</td>
+<td align="center">17</td>
+<td align="center">61</td>
+</tr>
+<tr class="even">
+<td align="center">Schenectady County</td>
+<td align="center">384</td>
+<td align="center">208</td>
+<td align="center">592</td>
+</tr>
+</tbody>
+</table>
+<p style="color:red;font-size:23px;">
+EV Registration data: Original over time
+</p>
+<table style="width:71%;">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="16%" />
+<col width="9%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Year</th>
+<th align="center">Month Name</th>
+<th align="center">PHEV/EREV</th>
+<th align="center">BEV</th>
+<th align="center">Total EVs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2011</td>
+<td align="center">December</td>
+<td align="center">90</td>
+<td align="center">71</td>
+<td align="center">161</td>
+</tr>
+<tr class="even">
+<td align="center">2012</td>
+<td align="center">December</td>
+<td align="center">2881</td>
+<td align="center">576</td>
+<td align="center">3457</td>
+</tr>
+<tr class="odd">
+<td align="center">2013</td>
+<td align="center">December</td>
+<td align="center">3323</td>
+<td align="center">1209</td>
+<td align="center">4532</td>
+</tr>
+<tr class="even">
+<td align="center">2014</td>
+<td align="center">December</td>
+<td align="center">3447</td>
+<td align="center">1197</td>
+<td align="center">4644</td>
+</tr>
+<tr class="odd">
+<td align="center">2015</td>
+<td align="center">December</td>
+<td align="center">2398</td>
+<td align="center">1347</td>
+<td align="center">3745</td>
+</tr>
+<tr class="even">
+<td align="center">2016</td>
+<td align="center">January</td>
+<td align="center">220</td>
+<td align="center">77</td>
+<td align="center">297</td>
+</tr>
+</tbody>
+</table>
+<p style="color:red;font-size:23px;">
+EV Registration data: Original by make
+</p>
+<table style="width:82%;">
+<colgroup>
+<col width="9%" />
+<col width="13%" />
+<col width="16%" />
+<col width="16%" />
+<col width="8%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Year</th>
+<th align="center">Quarter</th>
+<th align="center">Make</th>
+<th align="center">PHEV/EREV</th>
+<th align="center">BEV</th>
+<th align="center">Total EVs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2011</td>
+<td align="center">4</td>
+<td align="center">Smart</td>
+<td align="center">0</td>
+<td align="center">10</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">2011</td>
+<td align="center">4</td>
+<td align="center">Smith</td>
+<td align="center">0</td>
+<td align="center">7</td>
+<td align="center">7</td>
+</tr>
+<tr class="odd">
+<td align="center">2011</td>
+<td align="center">4</td>
+<td align="center">Tesla</td>
+<td align="center">0</td>
+<td align="center">37</td>
+<td align="center">37</td>
+</tr>
+<tr class="even">
+<td align="center">2011</td>
+<td align="center">4</td>
+<td align="center">Porsche</td>
+<td align="center">35</td>
+<td align="center">0</td>
+<td align="center">35</td>
+</tr>
+<tr class="odd">
+<td align="center">2011</td>
+<td align="center">4</td>
+<td align="center">Azure</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">2011</td>
+<td align="center">4</td>
+<td align="center">Chevrolet</td>
+<td align="center">55</td>
+<td align="center">0</td>
+<td align="center">55</td>
+</tr>
+</tbody>
+</table>
 
 </div>
             </section>
@@ -138,7 +936,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/02-data.Rmd",
+"link": "https://github.com/yl3738/EVchargingStation/edit/main/02-data.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -146,7 +944,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/02-data.Rmd",
+"link": "https://github.com/yl3738/EVchargingStation/blob/main/02-data.Rmd",
 "text": null
 },
 "download": null,

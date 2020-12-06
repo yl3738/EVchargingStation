@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Data transformation | YOUR TITLE HERE</title>
-  <meta name="description" content="Chapter 3 Data transformation | YOUR TITLE HERE" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <title>Chapter 3 Data transformation | Analysis on EV Charging Station in NY State</title>
+  <meta name="description" content="Chapter 3 Data transformation | Analysis on EV Charging Station in NY State" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Data transformation | YOUR TITLE HERE" />
+  <meta property="og:title" content="Chapter 3 Data transformation | Analysis on EV Charging Station in NY State" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Data transformation | YOUR TITLE HERE" />
+  <meta name="twitter:title" content="Chapter 3 Data transformation | Analysis on EV Charging Station in NY State" />
   
   
   
 
-<meta name="author" content="YOUR NAMES HERE" />
+<meta name="author" content="Dingwen Xie, Yuanhang Chen, Yu Liu" />
 
 
-<meta name="date" content="2020-11-09" />
+<meta name="date" content="2020-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="data-sources.html"/>
 <link rel="next" href="missing-values.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 
@@ -68,7 +69,7 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">EVCharger</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -89,7 +90,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysis on EV Charging Station in NY State</a>
           </h1>
         </div>
 
@@ -97,8 +98,35 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-transformation" class="section level1" number="3">
+<div id="data-transformation" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
+<p>From the New York State government website, we download the open NY data directly from the electric vehicle charging station map section web link. We then use the downloaded data set directly as a dataframe.</p>
+<p>To clean the data, we will drop irrelevant columns and check for duplicate rows.</p>
+<p>We will change the types to appropriate ones for the primary features we are going to focus on. For example, features such as city, state, EV connector types are in characters and we may need to convert them to factor data to better fit the desired graph; the dates information are also stored in character format, and we will transfer them to date formats.</p>
+<p>Also, in the next section, we will work on dealing with the missing values. we will check whether there are certain patterns in the empty columns and rows, and drop those unnecessary entries.</p>
+<p style="font-size:23px;">
+EV Charging Stations Info
+</p>
+<p>Charging Stations Access Days Time
+<img src="finalproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Charging Stations Owners
+<img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p style="font-size:23px;">
+EV Registration Info
+</p>
+<p>#Utility, original time and make may not be useful for our project.</p>
+<p>Popular model ranking
+<img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>County ranking
+<img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Zipcode heatmap
+<img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p style="font-size:23px;">
+Time series
+</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The above graph plots the number of newly opened stations on a certain day. It is clear that there are more stations opened in recent years.</p>
 
 </div>
             </section>
@@ -138,7 +166,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/03-cleaning.Rmd",
+"link": "https://github.com/yl3738/EVchargingStation/edit/main/03-cleaning.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -146,7 +174,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/03-cleaning.Rmd",
+"link": "https://github.com/yl3738/EVchargingStation/blob/main/03-cleaning.Rmd",
 "text": null
 },
 "download": null,

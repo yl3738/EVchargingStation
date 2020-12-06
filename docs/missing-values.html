@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Missing values | YOUR TITLE HERE</title>
-  <meta name="description" content="Chapter 4 Missing values | YOUR TITLE HERE" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <title>Chapter 4 Missing values | Analysis on EV Charging Station in NY State</title>
+  <meta name="description" content="Chapter 4 Missing values | Analysis on EV Charging Station in NY State" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Missing values | YOUR TITLE HERE" />
+  <meta property="og:title" content="Chapter 4 Missing values | Analysis on EV Charging Station in NY State" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Missing values | YOUR TITLE HERE" />
+  <meta name="twitter:title" content="Chapter 4 Missing values | Analysis on EV Charging Station in NY State" />
   
   
   
 
-<meta name="author" content="YOUR NAMES HERE" />
+<meta name="author" content="Dingwen Xie, Yuanhang Chen, Yu Liu" />
 
 
-<meta name="date" content="2020-11-09" />
+<meta name="date" content="2020-12-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="data-transformation.html"/>
 <link rel="next" href="results.html"/>
-<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 
@@ -68,7 +69,7 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">SHORT TITLE HERE</a></li>
+<li><a href="./">EVCharger</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -89,7 +90,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">YOUR TITLE HERE</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysis on EV Charging Station in NY State</a>
           </h1>
         </div>
 
@@ -97,8 +98,74 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="missing-values" class="section level1" number="4">
+<div id="missing-values" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
+<p style="font-size:23px;">
+Graph missing values by variable
+</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p style="font-size:23px;">
+Graph missing values by variable, facet on the month of information updating time
+</p>
+<p>The graph only plots variables that have a large proportion of missing values.
+<img src="finalproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Given the proportion of data by information updating month, the number of missing values is proportional to the total number of entries for each month.</p>
+<pre><code>## # A tibble: 10 x 2
+##    Updated.month    Prop
+##            &lt;dbl&gt;   &lt;dbl&gt;
+##  1             2 0.00108
+##  2             3 0.0317 
+##  3             4 0.0753 
+##  4             5 0.00699
+##  5             6 0.0656 
+##  6             7 0.00215
+##  7             8 0.0280 
+##  8             9 0.0301 
+##  9            10 0.0134 
+## 10            11 0.746</code></pre>
+<p>We conclude that there is no pattern for the input of missing values.</p>
+<p>However, since some of the missing values are not captured in the above graph, we also try using the visna graph to plot the missing values by variable, and sort by variable with the most to least missing values.</p>
+<pre><code>## NOTE: In the following pairs of variables, the missingness pattern of the second is a subset of the first.
+##  Please verify whether they are in fact logically distinct variables.
+##       [,1]                      [,2]                 
+##  [1,] &quot;Intersection.Directions&quot; &quot;Access.Days.Time&quot;   
+##  [2,] &quot;Plus4&quot;                   &quot;Station.Phone&quot;      
+##  [3,] &quot;Plus4&quot;                   &quot;Access.Days.Time&quot;   
+##  [4,] &quot;Plus4&quot;                   &quot;Cards.Accepted&quot;     
+##  [5,] &quot;Plus4&quot;                   &quot;EV.Level1.EVSE.Num&quot; 
+##  [6,] &quot;Plus4&quot;                   &quot;EV.Level2.EVSE.Num&quot; 
+##  [7,] &quot;Plus4&quot;                   &quot;EV.DC.Fast.Count&quot;   
+##  [8,] &quot;Plus4&quot;                   &quot;EV.Network.Web&quot;     
+##  [9,] &quot;Plus4&quot;                   &quot;Date.Last.Confirmed&quot;
+## [10,] &quot;Plus4&quot;                   &quot;Owner.Type.Code&quot;    
+## [11,] &quot;Plus4&quot;                   &quot;Federal.Agency.ID&quot;  
+## [12,] &quot;Plus4&quot;                   &quot;Federal.Agency.Name&quot;
+## [13,] &quot;Plus4&quot;                   &quot;Open.Date&quot;          
+## [14,] &quot;Expected.Date&quot;           &quot;Access.Days.Time&quot;   
+## [15,] &quot;Expected.Date&quot;           &quot;Cards.Accepted&quot;     
+## [16,] &quot;Expected.Date&quot;           &quot;EV.Level1.EVSE.Num&quot; 
+## [17,] &quot;Expected.Date&quot;           &quot;EV.Level2.EVSE.Num&quot; 
+## [18,] &quot;Expected.Date&quot;           &quot;EV.DC.Fast.Count&quot;   
+## [19,] &quot;Expected.Date&quot;           &quot;EV.Network.Web&quot;     
+## [20,] &quot;Expected.Date&quot;           &quot;Date.Last.Confirmed&quot;
+## [21,] &quot;Expected.Date&quot;           &quot;Owner.Type.Code&quot;    
+## [22,] &quot;Expected.Date&quot;           &quot;Federal.Agency.ID&quot;  
+## [23,] &quot;Expected.Date&quot;           &quot;Federal.Agency.Name&quot;
+## [24,] &quot;Expected.Date&quot;           &quot;Open.Date&quot;          
+## [25,] &quot;Cards.Accepted&quot;          &quot;Owner.Type.Code&quot;    
+## [26,] &quot;Cards.Accepted&quot;          &quot;Open.Date&quot;          
+## [27,] &quot;EV.Level1.EVSE.Num&quot;      &quot;Date.Last.Confirmed&quot;
+## [28,] &quot;EV.Other.Info&quot;           &quot;EV.Network.Web&quot;     
+## [29,] &quot;EV.Other.Info&quot;           &quot;Date.Last.Confirmed&quot;
+## [30,] &quot;EV.Other.Info&quot;           &quot;Owner.Type.Code&quot;    
+## [31,] &quot;EV.Other.Info&quot;           &quot;Federal.Agency.ID&quot;  
+## [32,] &quot;EV.Other.Info&quot;           &quot;Federal.Agency.Name&quot;
+## [33,] &quot;EV.Other.Info&quot;           &quot;Open.Date&quot;          
+## [34,] &quot;Owner.Type.Code&quot;         &quot;Open.Date&quot;          
+## [35,] &quot;Federal.Agency.ID&quot;       &quot;Open.Date&quot;          
+## [36,] &quot;Federal.Agency.Name&quot;     &quot;Open.Date&quot;</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /><em>TRUE</em></p>
+<p>From the graph, it does not seem to have obvious patterns in the missing values. So we directly drop the columns that contains only NA values, such as Plus4 and Expected Date.</p>
 
 </div>
             </section>
@@ -138,7 +205,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/04-missing.Rmd",
+"link": "https://github.com/yl3738/EVchargingStation/edit/main/04-missing.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -146,7 +213,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/04-missing.Rmd",
+"link": "https://github.com/yl3738/EVchargingStation/blob/main/04-missing.Rmd",
 "text": null
 },
 "download": null,
