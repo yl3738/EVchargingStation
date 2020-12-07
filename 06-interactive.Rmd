@@ -1,3 +1,4 @@
 # Interactive component
 
 
+# 下拉: connector type geomap/ zip geomap

@@ -1,9 +1,9 @@
 # Results
 
-```{r setup, include=FALSE}
- # keep this chunk in your .Rmd file
- knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-```
+
+TODO connector type
+time series + 改成柱状图& +growth rate 
+
 
 ```{r stations, include=FALSE}
 library(tidyverse)
@@ -79,7 +79,7 @@ ggplot(sortedcounty, aes(x = reorder(`County`,-`Total EVs`), y = `Total EVs`)) +
   geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="County")
 ```
 
-Zipcode heatmap 
+Zipcode heatmap of total EV stations
 ```{r}
 library(choroplethrZip)
 library(mapproj)
@@ -93,10 +93,26 @@ zip_group['region']=as.character(zip_group$region)
 
 zip_choropleth(zip_group, 
                state_zoom = "new york", 
-               title      = "Draw a heatmap by zip",
-               legend     = "Population") + coord_map()  
+               title      = "Draw a heatmap for EV stations by zip",
+               legend     = "Total EV stations") + coord_map()  
 
 ```
+
+Zipcode heatmap of total EV Registrition
+```{r}
+totalcar_zip <- registration_zipcode%>%
+      select(c("ZIP Code", "Total EVs"))
+
+colnames(totalcar_zip) <- c("region", "value")
+
+zip_choropleth(totalcar_zip, 
+               state_zoom = "new york", 
+               title      = "Draw a heatmap for EV registritions by zip",
+               legend     = "Total EVs") + coord_map()  
+```
+
+
+
 
 ```{r}
 temp <- registration_originaltime[1:nrow(registration_originaltime)-1,]
