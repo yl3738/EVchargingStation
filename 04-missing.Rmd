@@ -12,7 +12,7 @@ library(robotstxt)
 library(pander)
 library(readxl)
 #paths_allowed("https://data.ny.gov/api/views/7rrd-248n/rows.csv?accessType=DOWNLOAD&sorting=true")
-stations <-read.csv("https://data.ny.gov/api/views/7rrd-248n/rows.csv?accessType=DOWNLOAD&sorting=true")
+stations1 <-read.csv("https://data.ny.gov/api/views/7rrd-248n/rows.csv?accessType=DOWNLOAD&sorting=true")
 registration_url<-"https://www.nyserda.ny.gov/-/media/Files/Programs/ChargeNY/EV-Registration-Tables.xlsx"
 temp <-tempfile(fileext = ".xlsx")
 download.file(registration_url, destfile=temp, mode='wb')
@@ -28,7 +28,7 @@ registration_originalmake <- readxl::read_excel(temp, sheet =6)
 
 ```{r}
 library(naniar)
-gg_miss_var(stations)+ labs(y = "Missing values")
+gg_miss_var(stations1)+ labs(y = "Missing values")
 ```
 
 
@@ -36,7 +36,7 @@ gg_miss_var(stations)+ labs(y = "Missing values")
 The graph only plots variables that have a large proportion of missing values.
 ```{r}
 library(lubridate)
-stations_temp <- stations
+stations_temp <- stations1
 stations_temp$Updated.At <- as.POSIXlt(stations_temp$Updated.At, "%Y-%m-%d %H:%M:%S")
 stations_temp <- stations_temp  %>%
       select(c("Plus4", "Expected.Date", "EV.Other.Info","Federal.Agency.ID",
@@ -62,7 +62,7 @@ However, since some of the missing values are not captured in the above graph, w
 ```{r}
 # need to use read.csv here to setup for visna plot.
 library(mi)
-x <- missing_data.frame(stations)
+x <- missing_data.frame(stations1)
 library(extracat)
 pander(visna(x,sort = "b"))
 ```
