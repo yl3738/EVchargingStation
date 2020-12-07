@@ -43,7 +43,8 @@ stations_temp <- stations_temp  %>%
                "EV.Level1.EVSE.Num","EV.DC.Fast.Count","EV.Level2.EVSE.Num","Updated.At"))
 stations_temp["Updated.month"] <- month(stations_temp$Updated.At)
 
-gg_miss_var(stations_temp,facet = Updated.month)+ labs(y = "Missing values by updating month")
+g <- gg_miss_var(stations_temp,facet = Updated.month)+ labs(y = "Missing values by updating month")
+g
 ```
 
 Given the proportion of data by information updating month, the number of missing values is proportional to the total number of entries for each month.
