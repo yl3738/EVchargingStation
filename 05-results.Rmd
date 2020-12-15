@@ -1,7 +1,7 @@
 # Results
 
 
-TODO connector type
+TODO 
 time series + 改成柱状图& +growth rate 
 
 
@@ -59,7 +59,24 @@ ggplot(ownerlist, aes(x="", y=Freq, fill=Owner_Type)) +
   theme_void()
 ```
 
-
+Charger types
+```{r}
+total_level2<-sum(na.omit(stations$EV.Level2.EVSE.Num))
+total_level1<-sum(na.omit(stations$EV.Level1.EVSE.Num))
+total_fast<-sum(na.omit(stations$EV.DC.Fast.Count))
+tesla<-stations$EV.Connector.Types
+tesla_count<-0
+for (val in tesla)
+{
+    if(grepl(val,"TESLA")) tesla_count = tesla_count+1
+}
+chargertypedf <- data.frame(c("Level 1 - AC 110V","Level 2 - AC 240V", "DC Fast - DC Rapid Charging Others","DC Fast - Tesla"), c(total_level1,total_level2,total_fast-tesla_count,tesla_count))
+colnames(chargertypedf)<-c("Connector_Type","Freq")
+ggplot(chargertypedf, aes(x="", y=Freq, fill=Connector_Type)) +
+ geom_bar(stat="identity", width=1) +
+ coord_polar("y", start=0) +
+  theme_void()
+```
 
 <p style="font-size:23px;"> EV Registration Info </p>
 #Utility, original time and make may not be useful for our project.
