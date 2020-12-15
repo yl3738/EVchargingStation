@@ -1,7 +1,7 @@
 # Results
 
 
-TODO connector type
+TODO 
 time series + 改成柱状图& +growth rate 
 
 
@@ -22,6 +22,7 @@ registration_model <- readxl::read_excel(temp, sheet =3)
 registration_county <- readxl::read_excel(temp, sheet =4)
 registration_originaltime <- readxl::read_excel(temp, sheet =5)
 registration_originalmake <- readxl::read_excel(temp, sheet =6)
+
 ```
 
 
@@ -56,9 +57,29 @@ ownerlist$Owner_Type<-recode(ownerlist$Owner_Type,
 ggplot(ownerlist, aes(x="", y=Freq, fill=Owner_Type)) +
  geom_bar(stat="identity", width=1) +
  coord_polar("y", start=0) +
-  theme_void()
+  theme_void() + ggtitle('Charging Stations Owners Type') + 
+    theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
+Charger types
+```{r}
+total_level2<-sum(na.omit(stations$EV.Level2.EVSE.Num))
+total_level1<-sum(na.omit(stations$EV.Level1.EVSE.Num))
+total_fast<-sum(na.omit(stations$EV.DC.Fast.Count))
+tesla<-stations$EV.Connector.Types
+tesla_count<-0
+for (val in tesla)
+{
+    if(grepl(val,"TESLA")) tesla_count = tesla_count+1
+}
+chargertypedf <- data.frame(c("Level 1 - AC 110V","Level 2 - AC 240V", "DC Fast - DC Rapid Charging Others","DC Fast - Tesla"), c(total_level1,total_level2,total_fast-tesla_count,tesla_count))
+colnames(chargertypedf)<-c("Connector_Type","Freq")
+ggplot(chargertypedf, aes(x="", y=Freq, fill=Connector_Type)) +
+ geom_bar(stat="identity", width=1) +
+ coord_polar("y", start=0) +
+  theme_void()+ ggtitle('Charger Types') + 
+    theme(plot.title = element_text(size = 20, face = "bold"))
+```
 
 
 <p style="font-size:23px;"> EV Registration Info </p>
@@ -68,7 +89,9 @@ Popular model ranking
 ```{r}
 registration_modelname<-unite(registration_model, modelname, Make:Model, sep='-')[rev(order(registration_model$Registrations)),][-1,]
 ggplot(registration_modelname, aes(x = reorder(`modelname`,-`Registrations`), y = `Registrations`)) +
-  geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="Make-Model")
+  geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="Make-Model") + 
+  ggtitle('Popular model ranking') + 
+  theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
 
@@ -76,7 +99,9 @@ County ranking
 ```{r}
 sortedcounty<-registration_county[rev(order(registration_county$`Total EVs`)),][-1,]
 ggplot(sortedcounty, aes(x = reorder(`County`,-`Total EVs`), y = `Total EVs`)) +
-  geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="County")
+  geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="County")+ 
+  ggtitle('County ranking') + 
+  theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
 Zipcode heatmap of total EV stations
@@ -119,25 +144,62 @@ temp <- registration_originaltime[1:nrow(registration_originaltime)-1,]
 temp  <- temp  %>%
   group_by(Year)%>%
   summarize(total_EV=sum(`Total EVs`))
-ggplot(temp, aes(x=Year, y=total_EV))+geom_col()+ ggtitle('Number of Total EV by Years') + xlab("Year")+ylab("Number of Total EV")
+ggplot(temp, aes(x=Year, y=total_EV))+geom_col()+ ggtitle('Number of Total EV by Years') + 
+  xlab("Year") +
+  ylab("Number of Total EV") + 
+  theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
-<p style="font-size:23px;"> Time series </p>
 
 ```{r}
 library(lubridate)
 stations_ts <- stations
 stations_ts$Open.Date <- as.Date(stations_ts$Open.Date, "%m/%d/%Y")
 
-#stations_ts["Open.year"] <- year(stations_ts$Open.Date)
-#stations_ts["Open.month"] <- month(stations_ts$Open.Date)
-
 num <- data.frame(table(factor(format(stations_ts$Open.Date,"%D"))))
 num$Date <- as.Date(num$Var1,"%m/%d/%y")
-ggplot(num, aes(Date, Freq))+geom_line()+ ggtitle('Time Series Analysis on the Number of Newly Opened stations') + xlab("Date")+ylab("Number of Stations Count")
+
+num <- num[order(num$Date),]
+num$cumsum <-cumsum(num$Freq)
+
+num_temp  <- num  %>%
+  group_by(year(num$Date))%>%
+  summarize(total_EVsta=sum(`cumsum`))
+colnames(num_temp) <- c('year','count')
+
+ggplot(num_temp, aes(x=factor(year), y=count)) +
+  geom_col() +
+  ggtitle('Number of Total EV stations by Years') + 
+  xlab("Year") +
+  ylab("Number of Total EV stations") + 
+  theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
-The above graph plots the number of newly opened stations on a certain day. It is clear that there are more stations opened in recent years. 
+
+
+<p style="font-size:23px;"> Time series on growth rate: EV registrations vs. EV stations</p>
+
+```{r}
+growth <- (num_temp$count-lag(num_temp$count))/lag(num_temp$count)
+growth1 <- (temp$total_EV-lag(temp$total_EV))/lag(temp$total_EV)
+growth1 <- c(NA, growth1,NA)
+year <- c('2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020')
+growth_rate <- cbind(year, growth, growth1)
+colnames(growth_rate) <- c('year','EV_sta','EV_reg')
+growth_rate<- growth_rate[complete.cases(growth_rate), ] # remove NA because can't graph with NAs
+tidy <- data.frame(growth_rate) %>%
+  gather(key = type, value = rate, -year)
+tidy$rate <- as.numeric(tidy$rate)
+tidy$type <- as.factor(tidy$type)
+tidy$year <- as.numeric(as.character(tidy$year))
+
+ggplot(tidy, aes(year, rate, color = type)) + geom_point() + geom_line() + 
+  ggtitle('Time Series Analysis on the Growth Rate of \nNewly Opened Stations and Newly Registered EVs \nper Year') + 
+  xlab("Year") +
+  ylab("Growth Rate") + 
+  theme(plot.title = element_text(size = 20, face = "bold"))
+```
+
 
 
 
