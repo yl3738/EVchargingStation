@@ -3,3 +3,31 @@
 
  下拉: connector type geomap/ zip geomap
  倒数第二个video recording
+ 
+ 
+ <script src="https://d3js.org/d3.v6.js"></script>
+ 
+ <div id="plot"></div>
+ 
+ <script>
+ // Create SVG element
+    var svg = d3.select("div#plot")
+        .append("svg")
+        .attr("width", "400")
+        .attr("height", "250");
+        
+ // Add elements
+   svg.append("rect")
+        .attr("x", "0")
+        .attr("y", "0")
+        .attr("width", "400")
+        .attr("height", "400")
+        .attr("fill", "pink")
+        .transition()
+        .duration(2000)
+        .attr("width", "20");
+        
+        
+        
+        
+ </script>
