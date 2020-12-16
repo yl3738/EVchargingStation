@@ -141,10 +141,13 @@ zip_choropleth(totalcar_zip,
 
 ```{r}
 temp <- registration_originaltime[1:nrow(registration_originaltime)-1,]
-temp  <- temp  %>%
+cars  <- temp  %>%
   group_by(Year)%>%
   summarize(total_EV=sum(`Total EVs`))
-ggplot(temp, aes(x=Year, y=total_EV))+geom_col()+ ggtitle('Number of Total EV by Years') + 
+cars$cumsum <-cumsum(cars$total_EV)
+
+
+ggplot(cars, aes(x=Year, y=total_EV))+geom_col()+ ggtitle('Number of Total EV by Years (cumulative)') + 
   xlab("Year") +
   ylab("Number of Total EV") + 
   theme(plot.title = element_text(size = 20, face = "bold"))
@@ -160,16 +163,17 @@ num <- data.frame(table(factor(format(stations_ts$Open.Date,"%D"))))
 num$Date <- as.Date(num$Var1,"%m/%d/%y")
 
 num <- num[order(num$Date),]
-num$cumsum <-cumsum(num$Freq)
 
-num_temp  <- num  %>%
+sta <- num  %>%
   group_by(year(num$Date))%>%
-  summarize(total_EVsta=sum(`cumsum`))
-colnames(num_temp) <- c('year','count')
+  summarize(total_EVsta=sum(`Freq`))
+colnames(sta) <- c('year','count')
+sta$cumsum <-cumsum(sta$count)
 
-ggplot(num_temp, aes(x=factor(year), y=count)) +
+
+ggplot(sta, aes(x=factor(year), y=count)) +
   geom_col() +
-  ggtitle('Number of Total EV stations by Years') + 
+  ggtitle('Number of Total EV stations by Years (cumulative)') + 
   xlab("Year") +
   ylab("Number of Total EV stations") + 
   theme(plot.title = element_text(size = 20, face = "bold"))
@@ -180,13 +184,14 @@ ggplot(num_temp, aes(x=factor(year), y=count)) +
 <p style="font-size:23px;"> Time series on growth rate: EV registrations vs. EV stations</p>
 
 ```{r}
-growth <- (num_temp$count-lag(num_temp$count))/lag(num_temp$count)
-growth1 <- (temp$total_EV-lag(temp$total_EV))/lag(temp$total_EV)
+growth <- ((sta$cumsum-lag(sta$cumsum))/lag(sta$cumsum))/10*100
+growth1 <- ((cars$cumsum-lag(cars$cumsum))/lag(cars$cumsum))/21.4720497*100
 growth1 <- c(NA, growth1,NA)
 year <- c('2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020')
 growth_rate <- cbind(year, growth, growth1)
 colnames(growth_rate) <- c('year','EV_sta','EV_reg')
 growth_rate<- growth_rate[complete.cases(growth_rate), ] # remove NA because can't graph with NAs
+growth_rate <- growth_rate[-1,]
 tidy <- data.frame(growth_rate) %>%
   gather(key = type, value = rate, -year)
 tidy$rate <- as.numeric(tidy$rate)
@@ -200,7 +205,7 @@ ggplot(tidy, aes(year, rate, color = type)) + geom_point() + geom_line() +
   theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
-
+We scaled the growth rate of each year, then....
 
 
 
