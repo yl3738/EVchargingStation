@@ -110,27 +110,37 @@
  // Create SVG element
     var svg = d3.select("div#plot") 
         .append("svg")
-        .attr("width", "400")
-        .attr("height", "250");
+        .attr("width", "10000")
+        .attr("height", "25000");
         
  // Add elements
-   svg.append("rect")
-        .attr("x", "0")
-        .attr("y", "0")
-        .attr("width", "100")
-        .attr("height", "100")
-        .attr("fill", "pink")
-        .transition()
-        .duration(2000)
-        .attr("width", "20");
+
         
-   svg.append("rect")
-        .attr("x", "100")
-        .attr("y", "0")
-        .attr("width", "200")
-        .attr("height", "200")
-        .attr("fill", "purple")
-;      
+        // divided by 100 times
+   var bardata = [1.61, 34.57, 45.32, 46.44, 37.45, 65.02, 119.98, 172.06, 123.43];
+   var textdata = [161, 3457, 4532, 4644, 3745, 6502, 11998, 17206, 12343];
+
+   var bars = svg.selectAll("rect")
+      .data(bardata);
+
+   bars.enter()
+      .append("rect")
+        .attr("x", (d, i) => i*55)
+        .attr("y", d => 400 - d)
+        .attr("width", "35")
+        .attr("height",d => d)
+        .attr("fill", "blue");    
+        
+   svg.selectAll("text")
+      .data(textdata)
+      .enter()
+      .append("text")
+      .attr("x", (d, i) => i*55+20)
+      .attr("y", d => 380-(d/100))
+      .text(d => d)
+      .attr("fill", "blue")
+      .attr("text-anchor", "middle");
+        
         
         
  </script>
