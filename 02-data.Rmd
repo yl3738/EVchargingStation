@@ -1,5 +1,17 @@
 # Data sources
 
+Yu Liu is interested in clean energy and would like to do a project related to it. Other group members agreed since sustainable lifestyle is a trending topic, and it is a responsibility for we data scientists to utilize data for good. After searching on the internet, we decided to focus on electric vehicles (EVs).
+We secheduled a zoom meeting to collect the data together. When collecting data, we also considered to do a solar electric programs based on this data source (https://data.ny.gov/Energy-Environment/Solar-Electric-Programs-Reported-by-NYSERDA-Beginn/3x8r-34rs) since this data source has more rows. However,in the end, we believe electric cars are more popular in recent years, and this theme seems to be more attractive than solar electric. 
+
+We hope that people can pay more attention to clean energy and environmental protection. Using a popular topic can attract people's attention more easily. Obviously, cars are much more popular than solar energy. Therefore,in the end we choose we choose electric vehicles as our project theme. Related EV datasets are downloaded from this website (https://www.nyserda.ny.gov/All-Programs/Programs/ChargeNY/Support-Electric/Data-on-Electric-Vehicles-and-Charging-Stations). We may use the EV registration map and EV charging station map.
+
+There are 31 columns in the charging stations dataset, including station zipcode, name, fuel type, payment methods, EV connector types and many other metrics specific to EVs. Except for columns like zipcode and phone number, the majority of variables are either categorical or numerical. The data set includes 1865 rows. Many columns have missing values.
+
+EV registration map dataset contains 46842 registrations records and 6 sub charts, i.e. 6 ways of categorization: current registration by utility, by zipcode, by make-model, by country, original by make and original by time. This datafile does not have any missing values.
+
+There are also some issues here. Firstly, registration map is in .xlsx, and requires additional processing to get desired format. Secondly, the locartion details in the cahrging station dataset are subject to change. It's better to call the stations to verify a station's information, such asopen time, hours of operation, availablility to the public, and if has the desired alternative fuel prior to making a trip to that location.
+
+
 
 ```{r stations, include=FALSE}
 library(tidyverse)
