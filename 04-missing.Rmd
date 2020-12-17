@@ -1,8 +1,4 @@
 # Missing values
-```{r setup, include=FALSE}
- # keep this chunk in your .Rmd file
- knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-```
 
 
 ```{r stations, include=FALSE}
@@ -24,7 +20,9 @@ registration_originaltime <- readxl::read_excel(temp, sheet =5)
 registration_originalmake <- readxl::read_excel(temp, sheet =6)
 ```
 
-<p style="font-size:23px;"> Graph missing values by variable </p>
+
+We start by graphing the missing values by variable.
+<p style="font-size:23px;"> Missing Values by Variable </p>
 
 ```{r}
 library(naniar)
@@ -32,8 +30,8 @@ gg_miss_var(stations1)+ labs(y = "Missing values")
 ```
 
 
+To gain more insight whether the reason values are missing is related to the time the data is updated or not, we facet on months of updating time.
 <p style="font-size:23px;"> Graph missing values by variable, facet on the month of information updating time</p>
-The graph only plots variables that have a large proportion of missing values.
 ```{r}
 library(lubridate)
 stations_temp <- stations1
@@ -47,12 +45,15 @@ g <- gg_miss_var(stations_temp,facet = Updated.month)+ labs(y = "Missing values 
 g
 ```
 
+The graph only plots variables that have a large proportion of missing values.
+
 Given the proportion of data by information updating month, the number of missing values is proportional to the total number of entries for each month.
 ```{r}
 stations_temp %>%
   group_by(Updated.month) %>%
   summarize(Prop=n()/nrow(stations_temp))
 ```
+
 We conclude that there is no pattern for the input of missing values.
 
 

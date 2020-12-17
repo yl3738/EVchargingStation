@@ -11,6 +11,6 @@ The electric car has been developed rapidly over the past ten years, accounting 
 1.the change of the number of EV charging stations and EV registration over time.
 2.Geological distribution of charging stations in NY state.
 3.Analysis of the data set on specific categories such as EV connector types and models.
-(这个问题部分这次pset4扣分了)
+
 
 Related datasets are downloaded from this website (https://www.nyserda.ny.gov/All-Programs/Programs/ChargeNY/Support-Electric/Data-on-Electric-Vehicles-and-Charging-Stations). We will use the EV registration map and EV charging station map. 

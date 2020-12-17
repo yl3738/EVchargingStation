@@ -24,7 +24,7 @@
 <meta name="author" content="Dingwen Xie, Yuanhang Chen, Yu Liu" />
 
 
-<meta name="date" content="2020-12-06" />
+<meta name="date" content="2020-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -100,29 +100,32 @@
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
+We start by graphing the missing values by variable.
 <p style="font-size:23px;">
-Graph missing values by variable
+Missing Values by Variable
 </p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+To gain more insight whether the reason values are missing is related to the time the data is updated or not, we facet on months of updating time.
 <p style="font-size:23px;">
 Graph missing values by variable, facet on the month of information updating time
 </p>
-<p>The graph only plots variables that have a large proportion of missing values.
-<img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>The graph only plots variables that have a large proportion of missing values.</p>
 <p>Given the proportion of data by information updating month, the number of missing values is proportional to the total number of entries for each month.</p>
-<pre><code>## # A tibble: 10 x 2
+<pre><code>## # A tibble: 11 x 2
 ##    Updated.month    Prop
 ##            &lt;dbl&gt;   &lt;dbl&gt;
-##  1             2 0.00108
-##  2             3 0.0317 
-##  3             4 0.0753 
-##  4             5 0.00699
-##  5             6 0.0656 
-##  6             7 0.00215
-##  7             8 0.0280 
-##  8             9 0.0301 
-##  9            10 0.0134 
-## 10            11 0.746</code></pre>
+##  1             2 0.00106
+##  2             3 0.0313 
+##  3             4 0.0743 
+##  4             5 0.00690
+##  5             6 0.0647 
+##  6             7 0.00212
+##  7             8 0.0276 
+##  8             9 0.0297 
+##  9            10 0.0133 
+## 10            11 0.263  
+## 11            12 0.486</code></pre>
 <p>We conclude that there is no pattern for the input of missing values.</p>
 <p>However, since some of the missing values are not captured in the above graph, we also try using the visna graph to plot the missing values by variable, and sort by variable with the most to least missing values.</p>
 <pre><code>## NOTE: In the following pairs of variables, the missingness pattern of the second is a subset of the first.
@@ -136,34 +139,32 @@ Graph missing values by variable, facet on the month of information updating tim
 ##  [6,] &quot;Plus4&quot;                   &quot;EV.Level2.EVSE.Num&quot; 
 ##  [7,] &quot;Plus4&quot;                   &quot;EV.DC.Fast.Count&quot;   
 ##  [8,] &quot;Plus4&quot;                   &quot;EV.Network.Web&quot;     
-##  [9,] &quot;Plus4&quot;                   &quot;Date.Last.Confirmed&quot;
-## [10,] &quot;Plus4&quot;                   &quot;Owner.Type.Code&quot;    
-## [11,] &quot;Plus4&quot;                   &quot;Federal.Agency.ID&quot;  
-## [12,] &quot;Plus4&quot;                   &quot;Federal.Agency.Name&quot;
-## [13,] &quot;Plus4&quot;                   &quot;Open.Date&quot;          
-## [14,] &quot;Expected.Date&quot;           &quot;Access.Days.Time&quot;   
-## [15,] &quot;Expected.Date&quot;           &quot;Cards.Accepted&quot;     
-## [16,] &quot;Expected.Date&quot;           &quot;EV.Level1.EVSE.Num&quot; 
-## [17,] &quot;Expected.Date&quot;           &quot;EV.Level2.EVSE.Num&quot; 
-## [18,] &quot;Expected.Date&quot;           &quot;EV.DC.Fast.Count&quot;   
-## [19,] &quot;Expected.Date&quot;           &quot;EV.Network.Web&quot;     
-## [20,] &quot;Expected.Date&quot;           &quot;Date.Last.Confirmed&quot;
-## [21,] &quot;Expected.Date&quot;           &quot;Owner.Type.Code&quot;    
-## [22,] &quot;Expected.Date&quot;           &quot;Federal.Agency.ID&quot;  
-## [23,] &quot;Expected.Date&quot;           &quot;Federal.Agency.Name&quot;
-## [24,] &quot;Expected.Date&quot;           &quot;Open.Date&quot;          
-## [25,] &quot;Cards.Accepted&quot;          &quot;Owner.Type.Code&quot;    
-## [26,] &quot;Cards.Accepted&quot;          &quot;Open.Date&quot;          
-## [27,] &quot;EV.Level1.EVSE.Num&quot;      &quot;Date.Last.Confirmed&quot;
-## [28,] &quot;EV.Other.Info&quot;           &quot;EV.Network.Web&quot;     
-## [29,] &quot;EV.Other.Info&quot;           &quot;Date.Last.Confirmed&quot;
-## [30,] &quot;EV.Other.Info&quot;           &quot;Owner.Type.Code&quot;    
-## [31,] &quot;EV.Other.Info&quot;           &quot;Federal.Agency.ID&quot;  
-## [32,] &quot;EV.Other.Info&quot;           &quot;Federal.Agency.Name&quot;
-## [33,] &quot;EV.Other.Info&quot;           &quot;Open.Date&quot;          
-## [34,] &quot;Owner.Type.Code&quot;         &quot;Open.Date&quot;          
-## [35,] &quot;Federal.Agency.ID&quot;       &quot;Open.Date&quot;          
-## [36,] &quot;Federal.Agency.Name&quot;     &quot;Open.Date&quot;</code></pre>
+##  [9,] &quot;Plus4&quot;                   &quot;Owner.Type.Code&quot;    
+## [10,] &quot;Plus4&quot;                   &quot;Federal.Agency.ID&quot;  
+## [11,] &quot;Plus4&quot;                   &quot;Federal.Agency.Name&quot;
+## [12,] &quot;Plus4&quot;                   &quot;Open.Date&quot;          
+## [13,] &quot;Expected.Date&quot;           &quot;Access.Days.Time&quot;   
+## [14,] &quot;Expected.Date&quot;           &quot;Cards.Accepted&quot;     
+## [15,] &quot;Expected.Date&quot;           &quot;EV.Level1.EVSE.Num&quot; 
+## [16,] &quot;Expected.Date&quot;           &quot;EV.Level2.EVSE.Num&quot; 
+## [17,] &quot;Expected.Date&quot;           &quot;EV.DC.Fast.Count&quot;   
+## [18,] &quot;Expected.Date&quot;           &quot;EV.Network.Web&quot;     
+## [19,] &quot;Expected.Date&quot;           &quot;Owner.Type.Code&quot;    
+## [20,] &quot;Expected.Date&quot;           &quot;Federal.Agency.ID&quot;  
+## [21,] &quot;Expected.Date&quot;           &quot;Federal.Agency.Name&quot;
+## [22,] &quot;Expected.Date&quot;           &quot;Open.Date&quot;          
+## [23,] &quot;Cards.Accepted&quot;          &quot;Owner.Type.Code&quot;    
+## [24,] &quot;Cards.Accepted&quot;          &quot;Open.Date&quot;          
+## [25,] &quot;EV.Level1.EVSE.Num&quot;      &quot;Owner.Type.Code&quot;    
+## [26,] &quot;EV.Level1.EVSE.Num&quot;      &quot;Open.Date&quot;          
+## [27,] &quot;EV.Other.Info&quot;           &quot;EV.Network.Web&quot;     
+## [28,] &quot;EV.Other.Info&quot;           &quot;Owner.Type.Code&quot;    
+## [29,] &quot;EV.Other.Info&quot;           &quot;Federal.Agency.ID&quot;  
+## [30,] &quot;EV.Other.Info&quot;           &quot;Federal.Agency.Name&quot;
+## [31,] &quot;EV.Other.Info&quot;           &quot;Open.Date&quot;          
+## [32,] &quot;Owner.Type.Code&quot;         &quot;Open.Date&quot;          
+## [33,] &quot;Federal.Agency.ID&quot;       &quot;Open.Date&quot;          
+## [34,] &quot;Federal.Agency.Name&quot;     &quot;Open.Date&quot;</code></pre>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /><em>TRUE</em></p>
 <p>From the graph, it does not seem to have obvious patterns in the missing values. So we directly drop the columns that contains only NA values, such as Plus4 and Expected Date.</p>
 
