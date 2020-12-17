@@ -1,6 +1,12 @@
 # Results
 
 
+<p style="font-size:30px;"> EV registrations and stations continued to grow in the past 10 years, which may become a new vehicle trend </p>
+
+
+From 2011 to 2018, the number of EV registrations and charging stations has generally increased. By 2018, the number of EV registrations in New York reached its peak, with a total of approximately 19,000 units. The number of EV charging stations is about 175. In 2019, the number of EV registrations decreased slightly, while the number of charging stations continued to increase. As far as the growth rate is concerned, the number of EV registrations and charging stations has generally shown a steady growth trend except for the dramatic increase in the number of EV charging stations in New York in 2016. According to this article(https://brooklyneagle.com/articles/2019/03/18/electric-car-charging-stations/), New York's mayor Bill de Blasio required DOT to install charging stations in all municipal parking lots in 2016, which might be the reason why the number of stations had a dramatic increase in 2016. 
+As for the decline in the number of EV registrations in 2019, we haven't found a reasonable explanation yet. We believe it might be a normal market fluctuation. Besides, through reasonable expectations, the COVID-19 epidemic will definitely have an impact on the EV market. However, due to the lack of data on EV registrations in 2020, it is hard to determine the specific degree of impact. However, according to the change in the number of charging stations in 2020, it can be seen that in 2020,  nearly 100  EV stations decreased in New York. This shows that COVID-19 has a certain negative impact on the popularity of EVs. But this negative impact covers almost every field and due to time constraints, in this project, we will temporarily ignore the impact of it. After this course, we may continue to work on this project out of interest and explore the influence of COVID-19 deeply.
+
 
 ```{r stations, include=FALSE}
 library(tidyverse)
@@ -23,9 +29,6 @@ registration_originalmake <- readxl::read_excel(temp, sheet =6)
 ```
 
 
-
-
-<p style="font-size:23px;"> EV Charging Stations Info </p>
 ```{r}
 ## drop 3 columns with only NA values, will drop more irrelevant columns. Fuel Type Code has ELEV only. State has NY only. Status Code has E only
 stations <- stations %>%
@@ -33,13 +36,17 @@ stations <- stations %>%
 ```
 
 
-Charging Stations Access Days Time
+
 ```{r}
 stations$hours <- ifelse(grepl("24", stations$Access.Days.Time), "24hr", "other")
-pie(table(stations$hours),col=grey.colors(2))
+pie(table(stations$hours),col=terrain.colors(length(table(stations$hours))),radius=0.9,main = "Charging Stations Access Days Time")
 ```
+ 
+According to the 'Charging Stations Access Days Time' graph, around 90% of the charging stations in New York are 24-hours, which is very convinent for EV owners. We may expect that in the near future, charing stations will no longer be a problem.
+ 
+ 
      
-Charging Stations Owners
+
 ```{r}
 ownerlist<-data.frame(table(stations$Owner.Type.Code[stations$Owner.Type.Code!=""]))
 colnames(ownerlist)<-c("Owner_Type","Freq")
@@ -58,7 +65,11 @@ ggplot(ownerlist, aes(x="", y=Freq, fill=Owner_Type)) +
     theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
-Charger types
+From the graph, we can know most of the charging stations are privately owned. It means most of the EV owners have their own charging stations. 
+
+
+
+
 ```{r}
 total_level2<-sum(na.omit(stations$EV.Level2.EVSE.Num))
 total_level1<-sum(na.omit(stations$EV.Level1.EVSE.Num))
@@ -78,30 +89,38 @@ ggplot(chargertypedf, aes(x="", y=Freq, fill=Connector_Type)) +
     theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
+Around 80% of the chargers are level 2-AC 240V chargers. And then DC fast-DC rapid charing others and DC fast-Tesla account for around 10% each.
 
-<p style="font-size:23px;"> EV Registration Info </p>
-#Utility, original time and make may not be useful for our project.
 
-Popular model ranking
+
+
+
 ```{r}
 registration_modelname<-unite(registration_model, modelname, Make:Model, sep='-')[rev(order(registration_model$Registrations)),][-1,]
 ggplot(registration_modelname, aes(x = reorder(`modelname`,-`Registrations`), y = `Registrations`)) +
-  geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="Make-Model") + 
+  geom_col(position = "dodge",fill="lightblue")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="Make-Model") + 
   ggtitle('Popular model ranking') + 
   theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
 
-County ranking
+From the graph, it seems that most people like Tesla-Model 3 and Toyota-Prius Prime. 
+
+
+
 ```{r}
 sortedcounty<-registration_county[rev(order(registration_county$`Total EVs`)),][-1,]
 ggplot(sortedcounty, aes(x = reorder(`County`,-`Total EVs`), y = `Total EVs`)) +
-  geom_col(position = "dodge")+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="County")+ 
+  geom_col(position = "dodge", fill='lightgreen')+theme(axis.text.x=element_text(angle=90, hjust=1))+labs(x="County")+ 
   ggtitle('County ranking') + 
   theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
-Zipcode heatmap of total EV stations
+In new york, Suffolk is the county with the most EV registrations. Then the following is Nassau county and Westchester County.
+
+
+
+
 ```{r}
 library(choroplethrZip)
 library(mapproj)
@@ -115,12 +134,12 @@ zip_group['region']=as.character(zip_group$region)
 
 zip_choropleth(zip_group, 
                state_zoom = "new york", 
-               title      = "Draw a heatmap for EV stations by zip",
+               title      = "heatmap for EV stations by zipcode",
                legend     = "Total EV stations") + coord_map()  
 
 ```
 
-Zipcode heatmap of total EV Registrition
+
 ```{r}
 totalcar_zip <- registration_zipcode%>%
       select(c("ZIP Code", "Total EVs"))
@@ -129,10 +148,12 @@ colnames(totalcar_zip) <- c("region", "value")
 
 zip_choropleth(totalcar_zip, 
                state_zoom = "new york", 
-               title      = "Draw a heatmap for EV registritions by zip",
+               title      = "heatmap for EV registritions by zipcode",
                legend     = "Total EVs") + coord_map()  
 ```
 
+
+From the two graph above, it seems that in the middle part of new york, there are EV owners but no charging stations for them. It seems the the charing stations is still the most urgent problem at least for now.
 
 
 
@@ -144,7 +165,7 @@ cars  <- temp  %>%
 cars$cumsum <-cumsum(cars$total_EV)
 
 
-ggplot(cars, aes(x=Year, y=total_EV))+geom_col()+ ggtitle('Number of Total EV by Years (cumulative)') + 
+ggplot(cars, aes(x=Year, y=total_EV))+geom_col(fill="pink")+ ggtitle('Number of Total EV by Years (cumulative)') + 
   xlab("Year") +
   ylab("Number of Total EV") + 
   theme(plot.title = element_text(size = 20, face = "bold"))
@@ -169,7 +190,7 @@ sta$cumsum <-cumsum(sta$count)
 
 
 ggplot(sta, aes(x=factor(year), y=count)) +
-  geom_col() +
+  geom_col(fill='purple') +
   ggtitle('Number of Total EV stations by Years (cumulative)') + 
   xlab("Year") +
   ylab("Number of Total EV stations") + 
@@ -178,7 +199,7 @@ ggplot(sta, aes(x=factor(year), y=count)) +
 
 
 
-<p style="font-size:23px;"> Time series on growth rate: EV registrations vs. EV stations</p>
+
 
 ```{r}
 growth <- ((sta$cumsum-lag(sta$cumsum))/lag(sta$cumsum))/10*100
@@ -202,7 +223,9 @@ ggplot(tidy, aes(year, rate, color = type)) + geom_point() + geom_line() +
   theme(plot.title = element_text(size = 20, face = "bold"))
 ```
 
-We scaled the growth rate of each year, then....
+In order to see the change clearer, We scaled the growth rate of each year.
+
+
 
 
 
