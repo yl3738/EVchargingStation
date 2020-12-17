@@ -9,7 +9,7 @@
  
  <div id="plot"></div> 
  
- <p id="change">Change to EV Registration Data</p>
- <p id="back">Change Back</p>
+ <p id="change">Change to EV Registration Data (unit: 100 cars)</p>
+ <p id="back">Change to EV Station Data (unit: 1 station)</p>
  
  <script src="scripts/interactive.js"></script>
