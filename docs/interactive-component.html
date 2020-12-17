@@ -24,7 +24,7 @@
 <meta name="author" content="Dingwen Xie, Yuanhang Chen, Yu Liu" />
 
 
-<meta name="date" content="2020-12-16" />
+<meta name="date" content="2020-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -100,19 +100,43 @@
             <section class="normal" id="section-">
 <div id="interactive-component" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Interactive component</h1>
-<p>下拉: connector type geomap/ zip geomap
-倒数第二个video recording</p>
 <script src="https://d3js.org/d3.v6.js"></script>
+<head>
+<title>
+Id Attributes
+</title>
+<style>  
+        #change { 
+            color:purple; 
+            font-size:14px; 
+            font-weight:bold; 
+            text-align:center; 
+            border-style: dotted;
+         } 
+         #back { 
+            color:red; 
+            font-size:14px; 
+            font-weight:bold; 
+            text-align:center; 
+            border-style: dotted;
+         } 
+
+    </style>
+</head>
 <div id="plot">
 
 </div>
+<p style="font-size: 24px">
+Click Text Bars ↓
+</p>
 <p id="change">
-Change to EV Registration Data
+Change to EV Registration Data (unit: 100 cars)
 </p>
 <p id="back">
-Change Back
+Change to EV Station Data (unit: 1 station)
 </p>
 <script src="scripts/interactive.js"></script>
+<p>We scaled EV registration data by dividing 100, so that we can compare two histograms more easily.</p>
 
 </div>
             </section>
