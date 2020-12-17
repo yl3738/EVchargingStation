@@ -8,5 +8,8 @@
  <script src="https://d3js.org/d3.v6.js"></script>
  
  <div id="plot"></div> 
- <p id="change">EV Registration Data</p>
+ 
+ <p id="change">Change to EV Registration Data</p>
+ <p id="back">Change Back</p>
+ 
  <script src="scripts/interactive.js"></script>
