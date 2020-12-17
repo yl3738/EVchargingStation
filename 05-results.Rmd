@@ -1,9 +1,6 @@
 # Results
 
 
-TODO 
-time series + 改成柱状图& +growth rate 
-
 
 ```{r stations, include=FALSE}
 library(tidyverse)
