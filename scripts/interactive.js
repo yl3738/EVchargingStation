@@ -26,7 +26,8 @@
       .range([innerHeight, 0]);
 
   var xAxis = d3.axisBottom()
-      .scale(xScale);
+      .scale(xScale)
+      .tickFormat((d, i) => [2011,2012,2013,2014,2015,2016,2017,2018,2019][i]);
 
   var yAxis = d3.axisLeft()
       .scale(yScale);
@@ -45,7 +46,7 @@
       .attr("y", 0)
       .attr("width", w)
       .attr("height", h)
-      .attr("fill", "pink");
+      .attr("fill", "lightblue");
 
 // add bars as a group
 
@@ -74,4 +75,3 @@
       .attr("transform", `translate (${margin.left}, ${margin.top})`)
       .call(yAxis);
 
-    
